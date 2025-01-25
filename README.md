@@ -61,7 +61,7 @@ If you're using [VS Code](https://code.visualstudio.com/), this template comes w
   <summary>Run release builds</summary>
 
 - Use `bevy run --release --no-default-features` to run a native release build.
-- Use `bevy run --profile web-release --no-default-features web` to run a web release build.
+- Use `bevy run --release --no-default-features web` to run a web release build.
 
 </details>
 
