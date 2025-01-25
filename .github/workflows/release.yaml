@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version number in the format `v1.2.3`'
+        description: "Version number in the format `v1.2.3`"
         required: true
         type: string
 
@@ -159,15 +159,15 @@ jobs:
       - name: Prepare output directories
         run: rm -rf tmp; mkdir -p tmp/binary '${{ env.app }}'
 
-      - name: Install cargo-binstall (Web)
-        if: ${{ matrix.platform == 'web' }}
-        uses: cargo-bins/cargo-binstall@v1.9.0
-
-      - name: Install and run trunk (Web)
+      - name: Install and run Bevy CLI (Web)
         if: ${{ matrix.platform == 'web' }}
         run: |
-          cargo binstall --no-confirm trunk wasm-bindgen-cli wasm-opt
-          trunk build --locked --release --dist '${{ env.app }}'
+          cargo install --git=https://github.com/TheBevyFlock/bevy_cli --locked bevy_cli
+          bevy build --locked --release web --bundle
+
+      - name: Move web bundle (Web)
+        if: ${{ matrix.platform == 'web' }}
+        run: mv 'target/bevy_web/web-release/${{ env.cargo_build_binary_name }}' '${{ env.app }}'
 
       - name: Build binaries (non-Web)
         if: ${{ matrix.platform != 'web' }}
@@ -266,7 +266,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Do nothing
-        run: 'true'
+        run: "true"
     outputs:
       target: ${{ env.upload_to_itch }}
 
