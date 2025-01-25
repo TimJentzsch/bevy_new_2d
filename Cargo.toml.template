@@ -61,18 +61,3 @@ opt-level = 3
 # Remove expensive debug assertions due to <https://github.com/bevyengine/bevy/issues/14291>
 [profile.dev.package.wgpu-types]
 debug-assertions = false
-
-# Optimize for size in web builds to reduce load times and bandwidth usage.
-[profile.web]
-inherits = "release"
-# Compile the entire crate as one unit.
-# Slows compile times, marginal improvements.
-codegen-units = 1
-# Do a second optimization pass over the entire program, including dependencies.
-# Slows compile times, marginal improvements.
-lto = "thin"
-# Optimize with size in mind (also try "z", sometimes it is better).
-# Slightly slows compile times, great improvements to file size and runtime performance.
-opt-level = "s"
-# Strip all debugging information from the binary to slightly reduce file size.
-strip = "debuginfo"
