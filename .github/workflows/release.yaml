@@ -163,7 +163,7 @@ jobs:
         if: ${{ matrix.platform == 'web' }}
         run: |
           cargo install --git=https://github.com/TheBevyFlock/bevy_cli --locked bevy_cli
-          bevy build --locked --release web --bundle
+          bevy build --locked --release --yes web --bundle
 
       - name: Move web bundle (Web)
         if: ${{ matrix.platform == 'web' }}
