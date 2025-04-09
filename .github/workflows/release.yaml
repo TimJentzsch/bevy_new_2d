@@ -206,7 +206,7 @@ jobs:
         if: ${{ env.is_platform_enabled == 'true' && matrix.platform != 'web' }}
         run: |
           for target in ${{ matrix.targets }}; do
-            cargo build --locked --profile='${{ matrix.profile }}' --target="${target}" --features='${{ matrix.features }}'
+            cargo build --locked --profile='${{ matrix.profile }}' --target="${target}" --no-default-features --features='${{ matrix.features }}'
             mv target/"${target}"/'${{ matrix.profile }}/${{ env.cargo_build_binary_name }}${{ matrix.binary_ext }}' tmp/binary/"${target}"'${{ matrix.binary_ext }}'
           done
 
